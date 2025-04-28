@@ -1,6 +1,9 @@
+import os
+from dotenv import load_dotenv
 from flask import Flask, redirect, url_for, session
 from authlib.integrations.flask_client import OAuth
-import os
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'fsadfaxiadfo#!'  # 请替换为您的密钥
@@ -10,7 +13,7 @@ oauth = OAuth(app)
 oauth.register(
     name='github',
     client_id='Ov23liuISbdburGixBQE',
-    client_secret='',
+    client_secret=os.getenv('GITHUB_CLIENT_SECRET'),
     access_token_url='https://github.com/login/oauth/access_token',
     authorize_url='https://github.com/login/oauth/authorize',
     api_base_url='https://api.github.com/',
@@ -24,11 +27,12 @@ def homepage():
 @app.route('/login')
 def login():
     github = oauth.create_client('github')
-    redirect_uri = url_for('authorize', _external=True)
+    redirect_uri = url_for('callback', _external=True)
+    print(redirect_uri)
     return github.authorize_redirect(redirect_uri)
 
-@app.route('/authorize')
-def authorize():
+@app.route('/callback')
+def callback():
     github = oauth.create_client('github')
     token = github.authorize_access_token()
     resp = github.get('user')

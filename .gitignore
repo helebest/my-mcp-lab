@@ -1,3 +1,8 @@
+# General
+.DS_Store
+.env
+*/.env
+
 # Python-generated files
 __pycache__/
 *.py[oc]
@@ -17,3 +22,8 @@ wheels/
 */dist/
 */wheels/
 */*.egg-info
+
+
+# JS-generated files
+*/node_modules/
+*/.vscode/

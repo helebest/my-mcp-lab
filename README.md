@@ -20,7 +20,9 @@ uv run mcp dev <mcp_sse_server.py>
 uv run <mcp_sse_server.py>
 ```
 
-# Config SSE MCP Server for Cursor, Trae, Claude Desktop
+# Config SSE MCP Server
+
+## For Trae, Claude Desktop
 ```json
 {
   "mcpServers": {
@@ -33,4 +35,10 @@ uv run <mcp_sse_server.py>
     }
   }
 }
+```
+
+## For Cursor, Cherry Studio
+
+```text
+http://localhost:8080/sse
 ```
